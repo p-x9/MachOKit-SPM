@@ -1,23 +1,24 @@
 // swift-tools-version: 5.9
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "MachOKitSPM",
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "MachOKitSPM",
-            targets: ["MachOKitSPM"]),
+            name: "MachOKit",
+            targets: ["MachOKit"]
+        ),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "MachOKitSPM"),
+        .binaryTarget(
+            name: "MachOKit",
+            url: "https://github.com/p-x9/MachOKit/releases/download/0.1.4/MachOKit.xcframework.zip",
+            checksum: "d6248549aa374de3628432b26e8b7bc331ed12949141c531a8e51bae0cbc53ca"
+        ),
         .testTarget(
             name: "MachOKitSPMTests",
-            dependencies: ["MachOKitSPM"]),
+            dependencies: ["MachOKit"]
+        ),
     ]
 )
