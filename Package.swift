@@ -7,18 +7,17 @@ let package = Package(
     products: [
         .library(
             name: "MachOKit",
-            targets: ["MachOKit"]
+            targets: ["MachOKitBin", "_MachOKitSPM"]
         ),
     ],
     targets: [
         .binaryTarget(
-            name: "MachOKit",
-            url: "https://github.com/p-x9/MachOKit/releases/download/0.1.5/MachOKit.xcframework.zip",
-            checksum: "f903478fc48879da09d199314530bdf169329fd3b224cc9519648efeff971933"
+            name: "MachOKitBin",
+            url: "https://github.com/p-x9/MachOKit/releases/download/0.2.0/MachOKit.xcframework.zip",
+            checksum: "74d9a32dbf588a2ef2e7f0644b0f2dc1b66d28b878a793f93d36f40ffc7fde3f"
         ),
-        .testTarget(
-            name: "MachOKitSPMTests",
-            dependencies: ["MachOKit"]
-        ),
+        .target(
+            name: "_MachOKitSPM"
+        )
     ]
 )
