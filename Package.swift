@@ -23,11 +23,11 @@ let package = Package(
         ),
         .target(
             name: "_MachOKitSPM",
-            dependencies: ["MachOKitBin"]
+            dependencies: ["MachOKitBin", "MachOKitCBin"]
         ),
         .testTarget(
             name: "MachOKitSPMTests",
-            dependencies: ["MachOKitBin"]
+            dependencies: ["_MachOKitSPM"]
         )
     ]
 )

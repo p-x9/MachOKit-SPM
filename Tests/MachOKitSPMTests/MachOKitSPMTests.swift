@@ -1,5 +1,5 @@
 import XCTest
-import MachOKit
+import _MachOKitSPM
 
 final class MachOKitSPMTests: XCTestCase {
     func test() {
