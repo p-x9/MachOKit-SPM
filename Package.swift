@@ -13,13 +13,13 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "MachOKitBin",
-            url: "https://github.com/p-x9/MachOKit/releases/download/0.13.0/MachOKit.xcframework.zip",
-            checksum: "efe3c77e8a9f6e622baa9b750ff2b9bd72a3a958ac153ddfce719e577a23dd1e"
+            url: "https://github.com/p-x9/MachOKit/releases/download/0.13.1/MachOKit.xcframework.zip",
+            checksum: "b31135679d0b106c7ac74db059eabb7e518f75a3b3eb8b8144ac438cae9f7ffa"
         ),
         .binaryTarget(
             name: "MachOKitCBin",
-            url: "https://github.com/p-x9/MachOKit/releases/download/0.13.0/MachOKitC.xcframework.zip",
-            checksum: "6f919c66850eae914184f2683e46f38616afb3575277b9eb92b86e20d833c114"
+            url: "https://github.com/p-x9/MachOKit/releases/download/0.13.1/MachOKitC.xcframework.zip",
+            checksum: "05feabd72dcd868069347d726eb917a9b52a3ab448a99454a24c6a1ea7f6f9e9"
         ),
         .target(
             name: "_MachOKitSPM",
