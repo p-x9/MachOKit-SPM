@@ -1,0 +1,42 @@
+name: Update Binary Version
+
+on:
+  repository_dispatch:
+    types: [update_binary_version]
+
+permissions:
+  contents: write
+
+jobs:
+  run_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Update Package.swift
+        run: |
+          ASSET_URL="https://github.com/p-x9/MachOKit/releases/download/${{ github.event.client_payload.version }}/MachOKit.xcframework.zip"
+          CHECKSUM="${{ github.event.client_payload.mach-o_kit_checksum }}"
+          TARGET_NAME="MachOKitBin"
+          perl -0777 -pi -e 's|(binaryTarget\s*\(\s*name:\s*\"'"$TARGET_NAME"'\".*?\n\s*url:\s*\")[^\"]+(\",\s*\n\s*checksum:\s*\")[^\"]+(\"\s*\))|\1'"$ASSET_URL"'\2'"$CHECKSUM"'\3|s' Package.swift
+
+          ASSET_URL="https://github.com/p-x9/MachOKit/releases/download/${{ github.event.client_payload.version }}/MachOKitC.xcframework.zip"
+          CHECKSUM="${{ github.event.client_payload.mach-o_kit_c_checksum }}"
+          TARGET_NAME="MachOKitCBin"
+          perl -0777 -pi -e 's|(binaryTarget\s*\(\s*name:\s*\"'"$TARGET_NAME"'\".*?\n\s*url:\s*\")[^\"]+(\",\s*\n\s*checksum:\s*\")[^\"]+(\"\s*\))|\1'"$ASSET_URL"'\2'"$CHECKSUM"'\3|s' Package.swift
+
+      - name: Commit & Push
+        run: |
+          git add Package.swift
+          git commit -m "version ${{ github.event.client_payload.version }}"
+          git tag -a "${{ github.event.client_payload.version }}"
+          git push origin "${{ github.event.client_payload.version }}"
+
+      - name: Release
+        run: |
+          gh release create ${{ github.event.client_payload.version }}"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
