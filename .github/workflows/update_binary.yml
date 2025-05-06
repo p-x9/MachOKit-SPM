@@ -21,12 +21,44 @@ jobs:
           ASSET_URL="https://github.com/p-x9/MachOKit/releases/download/${{ github.event.client_payload.version }}/MachOKit.xcframework.zip"
           CHECKSUM="${{ github.event.client_payload.mach-o_kit_checksum }}"
           TARGET_NAME="MachOKitBin"
-          perl -0777 -pi -e 's|(binaryTarget\s*\(\s*name:\s*\"'"$TARGET_NAME"'\".*?\n\s*url:\s*\")[^\"]+(\",\s*\n\s*checksum:\s*\")[^\"]+(\"\s*\))|\1'"$ASSET_URL"'\2'"$CHECKSUM"'\3|s' Package.swift
+          perl -0777 -pi -e '
+            s{
+              (
+                \.binaryTarget\s*\(\s*
+                name:\s*"'"$TARGET_NAME"'"\s*,\s*
+                url:\s*"
+              )
+              [^"]+
+              (
+                "\s*,\s*checksum:\s*"
+              )
+              [^"]+
+              (
+                "\s*\)
+              )
+            }{\1'"$ASSET_URL"'\2'"$CHECKSUM"'\3}xsg
+          ' Package.swift
 
           ASSET_URL="https://github.com/p-x9/MachOKit/releases/download/${{ github.event.client_payload.version }}/MachOKitC.xcframework.zip"
           CHECKSUM="${{ github.event.client_payload.mach-o_kit_c_checksum }}"
           TARGET_NAME="MachOKitCBin"
-          perl -0777 -pi -e 's|(binaryTarget\s*\(\s*name:\s*\"'"$TARGET_NAME"'\".*?\n\s*url:\s*\")[^\"]+(\",\s*\n\s*checksum:\s*\")[^\"]+(\"\s*\))|\1'"$ASSET_URL"'\2'"$CHECKSUM"'\3|s' Package.swift
+          perl -0777 -pi -e '
+            s{
+              (
+                \.binaryTarget\s*\(\s*
+                name:\s*"'"$TARGET_NAME"'"\s*,\s*
+                url:\s*"
+              )
+              [^"]+
+              (
+                "\s*,\s*checksum:\s*"
+              )
+              [^"]+
+              (
+                "\s*\)
+              )
+            }{\1'"$ASSET_URL"'\2'"$CHECKSUM"'\3}xsg
+          ' Package.swift
 
       - name: Commit & Push
         run: |
