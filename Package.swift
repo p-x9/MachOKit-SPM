@@ -10,9 +10,7 @@ let package = Package(
             targets: ["MachOKitBin", "MachOKitCBin", "_MachOKitSPM"]
         ),
     ],
-    dependencies: [
-        .package(url: "https://github.com/p-x9/swift-fileio.git", from: "0.9.0")
-    ],
+    dependencies: [],
     targets: [
         .binaryTarget(
             name: "MachOKitBin",
@@ -28,8 +26,7 @@ let package = Package(
             name: "_MachOKitSPM",
             dependencies: [
                 "MachOKitBin",
-                "MachOKitCBin",
-                .product(name: "FileIO", package: "swift-fileio")
+                "MachOKitCBin"
             ]
         ),
         .testTarget(
