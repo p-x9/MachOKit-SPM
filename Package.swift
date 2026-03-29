@@ -10,7 +10,12 @@ let package = Package(
             targets: ["MachOKitBin", "MachOKitCBin", "_MachOKitSPM"]
         ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(
+            url: "https://github.com/p-x9/swift-binary-parse-support-bin.git",
+            from: "0.1.1"
+        ),
+    ],
     targets: [
         .binaryTarget(
             name: "MachOKitBin",
@@ -26,7 +31,11 @@ let package = Package(
             name: "_MachOKitSPM",
             dependencies: [
                 "MachOKitBin",
-                "MachOKitCBin"
+                "MachOKitCBin",
+                .product(
+                    name: "BinaryParseSupport",
+                    package: "swift-binary-parse-support-bin"
+                )
             ]
         ),
         .testTarget(

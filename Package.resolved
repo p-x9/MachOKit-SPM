@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swift-binary-parse-support-bin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/p-x9/swift-binary-parse-support-bin.git",
+      "state" : {
+        "revision" : "14992c569ad92d127ca03a994f674aec9ddb233f",
+        "version" : "0.1.1"
+      }
+    }
+  ],
+  "version" : 2
+}
